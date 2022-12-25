@@ -49,3 +49,22 @@ $ npm install rxjs
 - See how the [map operator][map-operator] can be used to transform the emitted values similarly to `Array.map()`.
 
 [map-operator]: https://www.learnrxjs.io/learn-rxjs/concepts/rxjs-primer#operators
+
+# Example
+```js
+// source: https://www.learnrxjs.io/learn-rxjs/concepts/rxjs-primer
+import { fromEvent, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+// respond to click events
+const button = document.getElementById('button');
+const observable1 = fromEvent(button!, 'click');
+const subscription1 = observable1.subscribe(() => console.log('Button clicked!'));
+
+// deliver values as a sequence (on contrary of from)
+const observable2 = of(0, 1, 2, 3, 4);
+const observable3 = observable2.pipe(
+    map(value => value * 2)
+);
+observable3.subscribe(value => console.log(`value from sequence: ${value}`));
+```
